@@ -30,11 +30,12 @@
 </div>
 
 <footer>
-  <button class="toolbarButton pageUp" title="Previous Page" id="previous" (click)="previous"></button>
-  <button class="toolbarButton pageDown" title="Next Page" id="next" (click)="next"></button>
+  <button class="toolbarButton pageUp" title="Previous Page" id="previous" (click)="previous()"></button>
+  <button class="toolbarButton pageDown" title="Next Page" id="next" (click)="next()"></button>
 
-  <input type="number" id="pageNumber" class="toolbarField pageNumber" (change)="pageNumberChange" value="1" size="4" min="1">
+  <input type="number" id="pageNumber" class="toolbarField pageNumber" (change)="pageNumberChange()" value="1" size="4"
+    min="1">
 
-  <button class="toolbarButton zoomOut" title="Zoom Out" id="zoomOut" (click)="zoomOut"></button>
-  <button class="toolbarButton zoomIn" title="Zoom In" id="zoomIn" (click)="zoomIn"></button>
+  <button class="toolbarButton zoomOut" title="Zoom Out" id="zoomOut" (click)="zoomOut()"></button>
+  <button class="toolbarButton zoomIn" title="Zoom In" id="zoomIn" (click)="zoomIn()"></button>
 </footer>

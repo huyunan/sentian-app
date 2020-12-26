@@ -11,7 +11,7 @@ export class Tab1Page implements AfterViewInit {
   value: number = 0;
   USE_ONLY_CSS_ZOOM = true;
   TEXT_LAYER_MODE = 0; // DISABLE
-  MAX_IMAGE_SIZE = 1024 * 1024;
+  MAX_IMAGE_SIZE = -1
   CMAP_URL = "./assets/js/pdfjs-dist/cmaps/";
   CMAP_PACKED = true;
 
@@ -61,7 +61,6 @@ export class Tab1Page implements AfterViewInit {
     }
 
     let url = params.url;
-    let self = this;
     this.setTitleUsingUrl(url);
 
     // Loading document.
@@ -164,6 +163,7 @@ export class Tab1Page implements AfterViewInit {
 
     return pdfjsLib.shadow(this, "loadingBar", bar);
   }
+
   setTitleUsingUrl(url) {
     this.url = url;
     let title = pdfjsLib.getFilenameFromUrl(url) || url;

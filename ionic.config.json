@@ -1,5 +1,7 @@
 {
   "name": "sentian-app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
