@@ -1,0 +1,12 @@
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ng-container *ngFor="let card of cards">
+      <ion-card (click)="presentModal(card.url)">
+        <img [src]="card.src"/>
+        <ion-card-content>
+          <ion-card-subtitle>{{card.title}}</ion-card-subtitle>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </ion-list>
+</ion-content>
