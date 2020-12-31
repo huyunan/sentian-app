@@ -1,32 +1,30 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { PdfCards } from 'src/const/pdf-cards.const';
-import { PdfViewerPage } from 'src/share/components/pdf-viewer/pdf-viewer.page';
+import { EpubCards } from 'src/const/epub-cards.const';
+import { EpubViewerPage } from 'src/share/components/epub-viewer/epub-viewer.page';
 
 export interface Card {
   src: string;
   title: string;
   url: string;
 }
-
 @Component({
-  selector: 'app-bookrack',
-  templateUrl: 'bookrack.page.html',
-  styleUrls: ['bookrack.page.scss'],
+  selector: 'app-stack-room',
+  templateUrl: 'stack-room.page.html',
+  styleUrls: ['stack-room.page.scss'],
 })
-export class BookRackPage {
-  pdfCards: Card[] = [];
+export class StackRoomPage {
+  epubCards: Card[] = [];
   pdfHistory: any;
   constructor(private modalCtrl: ModalController) {
-    this.pdfCards = PdfCards;
+    this.epubCards = EpubCards;
   }
 
   async presentModal(url: string) {
     const modal = await this.modalCtrl.create({
-      component: PdfViewerPage,
+      component: EpubViewerPage,
       componentProps: {
-        DEFAULT_URL: url,
-        pdfHistory: this.pdfHistory
+        url: url
       },
       cssClass: 'st-modal-first',
       swipeToClose: true,

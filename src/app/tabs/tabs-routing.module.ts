@@ -12,8 +12,12 @@ const routes: Routes = [
         loadChildren: () => import('../bookrack/bookrack.module').then(m => m.BookRackPageModule)
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'stack',
+        loadChildren: () => import('../stack-room/stack-room.module').then(m => m.StackRoomPageModule)
+      },
+      {
+        path: 'lead',
+        loadChildren: () => import('../lead-reading/lead-reading.module').then(m => m.LeadReadingPageModule)
       },
       {
         path: 'tab3',

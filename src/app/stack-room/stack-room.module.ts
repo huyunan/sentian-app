@@ -3,9 +3,9 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab2Page } from './tab2.page';
+import { StackRoomPage } from './stack-room.page';
 
-import { Tab2PageRoutingModule } from './tab2-routing.module';
+import { StackRoomPageRoutingModule } from './stack-room-routing.module';
 import { EpubViewerPageModule } from 'src/share/components/epub-viewer/epub-viewer.module';
 
 @NgModule({
@@ -14,8 +14,8 @@ import { EpubViewerPageModule } from 'src/share/components/epub-viewer/epub-view
     CommonModule,
     FormsModule,
     EpubViewerPageModule,
-    Tab2PageRoutingModule
+    StackRoomPageRoutingModule
   ],
-  declarations: [Tab2Page]
+  declarations: [StackRoomPage]
 })
-export class Tab2PageModule {}
+export class StackRoomPageModule {}

@@ -1,29 +1,29 @@
-import { AfterViewInit, Component, Input } from "@angular/core";
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import * as pdfjsLib from "pdfjs-dist/build/pdf.js";
-import * as pdfjsViewer from "pdfjs-dist/web/pdf_viewer.js";
+import * as pdfjsLib from 'pdfjs-dist/build/pdf.js';
+import * as pdfjsViewer from 'pdfjs-dist/web/pdf_viewer.js';
 
 @Component({
-  selector: "app-pdf-viewer",
-  templateUrl: "pdf-viewer.page.html",
-  styleUrls: ["pdf-viewer.page.scss"],
+  selector: 'app-pdf-viewer',
+  templateUrl: 'pdf-viewer.page.html',
+  styleUrls: ['pdf-viewer.page.scss'],
 })
 export class PdfViewerPage implements AfterViewInit {
   @Input() DEFAULT_URL: string | null = null;
   title: string = '';
   value: number = 1;
-  
+
   USE_ONLY_CSS_ZOOM = true;
   pageCssFlg = false;
   TEXT_LAYER_MODE = 0; // DISABLE
   MAX_IMAGE_SIZE = 4096 * 4096;
-  CMAP_URL = "./assets/js/pdfjs-dist/cmaps/";
+  CMAP_URL = './assets/js/pdfjs-dist/cmaps/';
   CMAP_PACKED = true;
 
   DEFAULT_SCALE_DELTA = 1.1;
   MIN_SCALE = 0.25;
   MAX_SCALE = 10.0;
-  DEFAULT_SCALE_VALUE = "auto";
+  DEFAULT_SCALE_VALUE = 'auto';
   pdfLoadingTask: any;
   pdfDocument: any;
   pdfViewer: any;
@@ -35,10 +35,10 @@ export class PdfViewerPage implements AfterViewInit {
 
   constructor(private modalCtrl: ModalController) {
     if (!pdfjsLib.getDocument || !pdfjsViewer.PDFViewer) {
-      alert("Please build the pdfjs-dist library using\n `gulp dist-install`");
+      alert('Please build the pdfjs-dist library using\n `gulp dist-install`');
     }
     pdfjsLib.GlobalWorkerOptions.workerSrc =
-      "./assets/js/pdfjs-dist/pdf.worker.js";
+      './assets/js/pdfjs-dist/pdf.worker.js';
   }
 
   ngAfterViewInit(): void {
@@ -62,11 +62,11 @@ export class PdfViewerPage implements AfterViewInit {
       });
     }
 
-    let url = params.url;
+    const url = params.url;
     this.setTitleUsingUrl(url);
 
     // Loading document.
-    let loadingTask = pdfjsLib.getDocument({
+    const loadingTask = pdfjsLib.getDocument({
       url: url,
       maxImageSize: this.MAX_IMAGE_SIZE,
       cMapUrl: this.CMAP_URL,
@@ -90,35 +90,35 @@ export class PdfViewerPage implements AfterViewInit {
         this.setTitleUsingMetadata(pdfDocument);
       },
       (exception) => {
-        let message = exception && exception.message;
-        let l10n = this.l10n;
+        const message = exception && exception.message;
+        const l10n = this.l10n;
         let loadingErrorMessage;
 
         if (exception instanceof pdfjsLib.InvalidPDFException) {
           // change error message also for other builds
           loadingErrorMessage = l10n.get(
-            "invalid_file_error",
+            'invalid_file_error',
             null,
-            "Invalid or corrupted PDF file."
+            'Invalid or corrupted PDF file.'
           );
         } else if (exception instanceof pdfjsLib.MissingPDFException) {
           // special message for missing PDFs
           loadingErrorMessage = l10n.get(
-            "missing_file_error",
+            'missing_file_error',
             null,
-            "Missing PDF file."
+            'Missing PDF file.'
           );
         } else if (exception instanceof pdfjsLib.UnexpectedResponseException) {
           loadingErrorMessage = l10n.get(
-            "unexpected_response_error",
+            'unexpected_response_error',
             null,
-            "Unexpected server response."
+            'Unexpected server response.'
           );
         } else {
           loadingErrorMessage = l10n.get(
-            "loading_error",
+            'loading_error',
             null,
-            "An error occurred while loading the PDF."
+            'An error occurred while loading the PDF.'
           );
         }
 
@@ -136,14 +136,14 @@ export class PdfViewerPage implements AfterViewInit {
    *                      destruction is completed.
    */
   close() {
-    let errorWrapper = document.getElementById("errorWrapper");
-    errorWrapper.setAttribute("hidden", "true");
+    const errorWrapper = document.getElementById('errorWrapper');
+    errorWrapper.setAttribute('hidden', 'true');
 
     if (!this.pdfLoadingTask) {
       return Promise.resolve();
     }
 
-    let promise = this.pdfLoadingTask.destroy();
+    const promise = this.pdfLoadingTask.destroy();
     this.pdfLoadingTask = null;
 
     if (this.pdfDocument) {
@@ -161,9 +161,9 @@ export class PdfViewerPage implements AfterViewInit {
   }
 
   get loadingBar() {
-    let bar = new pdfjsViewer.ProgressBar("#loadingBar", {});
+    const bar = new pdfjsViewer.ProgressBar('#loadingBar', {});
 
-    return pdfjsLib.shadow(this, "loadingBar", bar);
+    return pdfjsLib.shadow(this, 'loadingBar', bar);
   }
 
   setTitleUsingUrl(url) {
@@ -180,23 +180,23 @@ export class PdfViewerPage implements AfterViewInit {
 
   setTitleUsingMetadata(pdfDocument) {
     pdfDocument.getMetadata().then((data) => {
-      let info = data.info,
+      const info = data.info,
         metadata = data.metadata;
       this.pageCssFlg = true;
       // Provides some basic debug information
       console.log(
-        "PDF " +
+        'PDF ' +
           pdfDocument.fingerprint +
-          " [" +
+          ' [' +
           info.PDFFormatVersion +
-          " " +
-          (info.Producer || "-").trim() +
-          " / " +
-          (info.Creator || "-").trim() +
-          "]" +
-          " (PDF.js: " +
-          (pdfjsLib.version || "-") +
-          ")"
+          ' ' +
+          (info.Producer || '-').trim() +
+          ' / ' +
+          (info.Creator || '-').trim() +
+          ']' +
+          ' (PDF.js: ' +
+          (pdfjsLib.version || '-') +
+          ')'
       );
 
       this.setTitle(document.title);
@@ -209,83 +209,83 @@ export class PdfViewerPage implements AfterViewInit {
   }
 
   error(message, moreInfo) {
-    let l10n = this.l10n;
-    let moreInfoText = [
+    const l10n = this.l10n;
+    const moreInfoText = [
       l10n.get(
-        "error_version_info",
-        { version: pdfjsLib.version || "?", build: pdfjsLib.build || "?" },
-        "PDF.js v{{version}} (build: {{build}})"
+        'error_version_info',
+        { version: pdfjsLib.version || '?', build: pdfjsLib.build || '?' },
+        'PDF.js v{{version}} (build: {{build}})'
       ),
     ];
 
     if (moreInfo) {
       moreInfoText.push(
         l10n.get(
-          "error_message",
+          'error_message',
           { message: moreInfo.message },
-          "Message: {{message}}"
+          'Message: {{message}}'
         )
       );
       if (moreInfo.stack) {
         moreInfoText.push(
-          l10n.get("error_stack", { stack: moreInfo.stack }, "Stack: {{stack}}")
+          l10n.get('error_stack', { stack: moreInfo.stack }, 'Stack: {{stack}}')
         );
       } else {
         if (moreInfo.filename) {
           moreInfoText.push(
             l10n.get(
-              "error_file",
+              'error_file',
               { file: moreInfo.filename },
-              "File: {{file}}"
+              'File: {{file}}'
             )
           );
         }
         if (moreInfo.lineNumber) {
           moreInfoText.push(
             l10n.get(
-              "error_line",
+              'error_line',
               { line: moreInfo.lineNumber },
-              "Line: {{line}}"
+              'Line: {{line}}'
             )
           );
         }
       }
     }
 
-    let errorWrapper = document.getElementById("errorWrapper");
-    errorWrapper.removeAttribute("hidden");
+    const errorWrapper = document.getElementById('errorWrapper');
+    errorWrapper.removeAttribute('hidden');
 
-    let errorMessage = document.getElementById("errorMessage");
+    const errorMessage = document.getElementById('errorMessage');
     errorMessage.textContent = message;
 
-    let closeButton = document.getElementById("errorClose");
-    closeButton.onclick = function () {
-      errorWrapper.setAttribute("hidden", "true");
+    const closeButton = document.getElementById('errorClose');
+    closeButton.onclick = function() {
+      errorWrapper.setAttribute('hidden', 'true');
     };
 
-    let errorMoreInfo: any = document.getElementById("errorMoreInfo");
-    let moreInfoButton = document.getElementById("errorShowMore");
-    let lessInfoButton = document.getElementById("errorShowLess");
-    moreInfoButton.onclick = function () {
-      errorMoreInfo.removeAttribute("hidden");
-      moreInfoButton.setAttribute("hidden", "true");
-      lessInfoButton.removeAttribute("hidden");
-      errorMoreInfo.style.height = errorMoreInfo.scrollHeight + "px";
+    const errorMoreInfo: any = document.getElementById('errorMoreInfo');
+    const moreInfoButton = document.getElementById('errorShowMore');
+    const lessInfoButton = document.getElementById('errorShowLess');
+    moreInfoButton.onclick = function() {
+      errorMoreInfo.removeAttribute('hidden');
+      moreInfoButton.setAttribute('hidden', 'true');
+      lessInfoButton.removeAttribute('hidden');
+      errorMoreInfo.style.height = errorMoreInfo.scrollHeight + 'px';
     };
-    lessInfoButton.onclick = function () {
-      errorMoreInfo.setAttribute("hidden", "true");
-      moreInfoButton.removeAttribute("hidden");
-      lessInfoButton.setAttribute("hidden", "true");
+    lessInfoButton.onclick = function() {
+      errorMoreInfo.setAttribute('hidden', 'true');
+      moreInfoButton.removeAttribute('hidden');
+      lessInfoButton.setAttribute('hidden', 'true');
     };
-    moreInfoButton.removeAttribute("hidden");
-    lessInfoButton.setAttribute("hidden", "true");
+    moreInfoButton.removeAttribute('hidden');
+    lessInfoButton.setAttribute('hidden', 'true');
     Promise.all(moreInfoText).then((parts) => {
-      errorMoreInfo.value = parts.join("\n");
+      errorMoreInfo.value = parts.join('\n');
     });
   }
 
   progress(level) {
-    let percent = Math.round(level * 100);
+    const percent = Math.round(level * 100);
     // Updating the bar if value increases.
     if (percent > this.loadingBar.percent || isNaN(percent)) {
       this.loadingBar.percent = percent;
@@ -337,18 +337,18 @@ export class PdfViewerPage implements AfterViewInit {
   }
 
   initUI() {
-    let eventBus = new pdfjsViewer.EventBus();
+    const eventBus = new pdfjsViewer.EventBus();
     this.eventBus = eventBus;
 
-    let linkService = new pdfjsViewer.PDFLinkService({
+    const linkService = new pdfjsViewer.PDFLinkService({
       eventBus: eventBus,
     });
     this.pdfLinkService = linkService;
 
     this.l10n = pdfjsViewer.NullL10n;
 
-    let container = document.getElementById("viewerContainer");
-    let pdfViewer = new pdfjsViewer.PDFViewer({
+    const container = document.getElementById('viewerContainer');
+    const pdfViewer = new pdfjsViewer.PDFViewer({
       container: container,
       eventBus: eventBus,
       linkService: linkService,
@@ -365,21 +365,21 @@ export class PdfViewerPage implements AfterViewInit {
     });
     linkService.setHistory(this.pdfHistory);
 
-    eventBus.on("pagesinit", () => {
+    eventBus.on('pagesinit', () => {
       // We can use pdfViewer now, e.g. let's change default scale.
       pdfViewer.currentScaleValue = this.DEFAULT_SCALE_VALUE;
     });
 
     eventBus.on(
-      "pagechanging",
+      'pagechanging',
       (evt) => {
-        let page = evt.pageNumber;
-        let numPages = this.pagesCount;
+        const page = evt.pageNumber;
+        const numPages = this.pagesCount;
 
         this.value = page;
-        (<HTMLButtonElement>document.getElementById("previous")).disabled =
+        ( document.getElementById('previous') as HTMLButtonElement).disabled =
           page <= 1;
-        (<HTMLButtonElement>document.getElementById("next")).disabled =
+        ( document.getElementById('next') as HTMLButtonElement).disabled =
           page >= numPages;
       },
       true
@@ -389,7 +389,7 @@ export class PdfViewerPage implements AfterViewInit {
   dismiss() {
     this.close();
     this.modalCtrl.dismiss({
-      'pdfHistory': this.pdfHistory
+      pdfHistory: this.pdfHistory
     });
   }
 }

@@ -1,28 +1,29 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Cards } from 'src/const/cards.const';
-import { EpubViewerPage } from 'src/share/components/epub-viewer/epub-viewer.page';
+import { PdfCards } from 'src/const/pdf-cards.const';
+import { PdfViewerPage } from 'src/share/components/pdf-viewer/pdf-viewer.page';
 
 export interface Card {
   src: string;
   title: string;
   url: string;
 }
+
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss'],
+  selector: 'app-lead-reading',
+  templateUrl: 'lead-reading.page.html',
+  styleUrls: ['lead-reading.page.scss'],
 })
-export class Tab2Page {
-  cards: Card[] = [];
+export class LeadReadingPage {
+  pdfCards: Card[] = [];
   pdfHistory: any;
   constructor(private modalCtrl: ModalController) {
-    this.cards = Cards;
+    this.pdfCards = PdfCards;
   }
 
   async presentModal(url: string) {
     const modal = await this.modalCtrl.create({
-      component: EpubViewerPage,
+      component: PdfViewerPage,
       componentProps: {
         DEFAULT_URL: url,
         pdfHistory: this.pdfHistory

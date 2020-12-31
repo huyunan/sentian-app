@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ng-container *ngFor="let card of cards;let i = index">
+    <ng-container *ngFor="let card of epubCards;let i = index">
       <ion-card (click)="presentModal(card.url)">
         <img [src]="card.src" />
         <ion-card-content>
