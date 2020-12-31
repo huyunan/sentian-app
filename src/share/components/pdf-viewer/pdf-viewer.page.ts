@@ -16,7 +16,7 @@ export class PdfViewerPage implements AfterViewInit {
   USE_ONLY_CSS_ZOOM = true;
   pageCssFlg = false;
   TEXT_LAYER_MODE = 0; // DISABLE
-  MAX_IMAGE_SIZE = 1024 * 1024;
+  MAX_IMAGE_SIZE = 4096 * 4096;
   CMAP_URL = "./assets/js/pdfjs-dist/cmaps/";
   CMAP_PACKED = true;
 
@@ -57,9 +57,7 @@ export class PdfViewerPage implements AfterViewInit {
    */
   open(params) {
     if (this.pdfLoadingTask) {
-      // We need to destroy already opened document
       return this.close().then(() => {
-        // ... and repeat the open() call.
         return this.open(params);
       });
     }

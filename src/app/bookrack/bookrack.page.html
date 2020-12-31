@@ -1,10 +1,10 @@
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ng-container *ngFor="let card of cards">
+    <ng-container *ngFor="let card of cards;let i = index">
       <ion-card (click)="presentModal(card.url)">
-        <img [src]="card.src"/>
+        <img [src]="card.src" />
         <ion-card-content>
-          <ion-card-subtitle>{{card.title}}</ion-card-subtitle>
+          <ion-card-subtitle>{{ (i + 1) + '.' + card.title}}</ion-card-subtitle>
         </ion-card-content>
       </ion-card>
     </ng-container>

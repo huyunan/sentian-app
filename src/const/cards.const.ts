@@ -141,12 +141,12 @@ export const Cards = [
   },
   {
     src: "./assets/img/book/1.png",
-    title: "error关系对话心理咨询技术",
+    title: "关系对话心理咨询技术",
     url: "../../../assets/pdf/关系对话心理咨询技术.pdf",
   },
   {
     src: "./assets/img/book/2.png",
-    title: "error建立自信，超越恐惧",
+    title: "建立自信，超越恐惧",
     url: "../../../assets/pdf/建立自信，超越恐惧.pdf",
   },
 ];

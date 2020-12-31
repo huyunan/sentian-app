@@ -1,18 +1,18 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Cards } from "src/const/cards.const";
-import { PdfViewerPage } from "src/share/components/pdf-viewer/pdf-viewer.page";
+import { Cards } from 'src/const/cards.const';
+import { PdfViewerPage } from 'src/share/components/pdf-viewer/pdf-viewer.page';
 
 export interface Card {
-  src: string,
-  title: string,
-  url: string
+  src: string;
+  title: string;
+  url: string;
 }
 
 @Component({
-  selector: "app-bookrack",
-  templateUrl: "bookrack.page.html",
-  styleUrls: ["bookrack.page.scss"],
+  selector: 'app-bookrack',
+  templateUrl: 'bookrack.page.html',
+  styleUrls: ['bookrack.page.scss'],
 })
 export class BookRackPage {
   cards: Card[] = [];
@@ -25,10 +25,10 @@ export class BookRackPage {
     const modal = await this.modalCtrl.create({
       component: PdfViewerPage,
       componentProps: {
-        'DEFAULT_URL': url,
-        'pdfHistory': this.pdfHistory
+        DEFAULT_URL: url,
+        pdfHistory: this.pdfHistory
       },
-      cssClass: 'my-custom-class',
+      cssClass: 'st-modal-first',
       swipeToClose: true,
     });
     await modal.present();
