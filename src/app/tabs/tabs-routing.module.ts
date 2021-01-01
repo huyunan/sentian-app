@@ -20,8 +20,8 @@ const routes: Routes = [
         loadChildren: () => import('../lead-reading/lead-reading.module').then(m => m.LeadReadingPageModule)
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'person',
+        loadChildren: () => import('../person/person.module').then(m => m.PersonPageModule)
       },
       {
         path: '',

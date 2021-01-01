@@ -3,17 +3,15 @@
     <ion-toolbar>
       <ion-title>{{title}}</ion-title>
       <ion-buttons slot="start">
-        <ion-button onClick="dismiss()">
-          <ion-icon slot="start" name="arrow-back-circle-outline"></ion-icon>
+        <ion-button (click)="dismiss()" fill="clear">
+          <ion-icon slot="start" size="large" name="arrow-back-circle-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
   <div id="divider"></div>
-  <div id="prev" class="arrow">‹</div>
   <div id="viewer"></div>
-  <div id="next" class="arrow">›</div>
 
   <div id="loader"><img src="./assets/img/epub/loader.gif" /></div>
 </div>

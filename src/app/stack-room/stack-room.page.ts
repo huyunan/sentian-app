@@ -15,7 +15,6 @@ export interface Card {
 })
 export class StackRoomPage {
   epubCards: Card[] = [];
-  pdfHistory: any;
   constructor(private modalCtrl: ModalController) {
     this.epubCards = EpubCards;
   }
@@ -30,8 +29,5 @@ export class StackRoomPage {
       swipeToClose: true,
     });
     await modal.present();
-    const { data } = await modal.onWillDismiss();
-    console.log(data.pdfHistory);
-    this.pdfHistory = data.pdfHistory;
   }
 }

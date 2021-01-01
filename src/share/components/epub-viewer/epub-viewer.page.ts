@@ -25,14 +25,13 @@ export class EpubViewerPage implements AfterViewInit {
     const rendition = this.book.renderTo(viewer, {
       manager: 'continuous',
       flow: 'paginated',
-      width: '100%',
-      height: '100%',
+      width: '100vw',
+      height: '100vh',
       snap: true,
     });
 
     this.book.loaded.metadata.then((meta: any) => {
-      const auther = meta.author || '小妖';
-      this.title = meta.title + ' – ' + auther;
+      this.title = meta.title;
     });
 
     const displayed = rendition.display();
@@ -47,24 +46,6 @@ export class EpubViewerPage implements AfterViewInit {
     this.book.loaded.navigation.then((toc) => {
       // console.log(toc);
     });
-
-    const next = document.getElementById('next');
-    next.addEventListener(
-      'click',
-      () => {
-        rendition.next();
-      },
-      false
-    );
-
-    const prev = document.getElementById('prev');
-    prev.addEventListener(
-      'click',
-      () => {
-        rendition.prev();
-      },
-      false
-    );
 
     document.addEventListener(
       'keyup',
@@ -86,7 +67,7 @@ export class EpubViewerPage implements AfterViewInit {
   dismiss() {
     this.book.destroy();
     this.modalCtrl.dismiss({
-      pdfHistory: 'this.pdfHistory',
+      dismiss: 'true',
     });
   }
 }
